@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
 
     while (is_running) {
         //gui.update(cpu.video, videoPitch);
+        cpu.execute();
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 is_running = false;

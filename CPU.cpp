@@ -9,23 +9,22 @@
 #include <cstring>
 
 CPU::CPU(char *filename) {
+    setUpTable();
     reset();
-    //NintendoLogo();
     //loadBootLoader();
     loadROM(filename);
 }
 
-
-void CPU::NintendoLogo() {
-    uint8_t buffer[256] = {
-            0xCE, 0xED, 0x66, 0x66, 0xCC, 0x0D, 0x00, 0x0B, 0x03, 0x73, 0x00, 0x83,  0x00, 0x0C, 0x00, 0x0D,
-            0x00, 0x08, 0x11, 0x1F, 0x88, 0x89, 0x00, 0x0E, 0xDC, 0xCC, 0x6E, 0xE6, 0xDD, 0xDD, 0xD9, 0x99,
-            0xBB, 0xBB, 0x67, 0x63, 0x6E, 0x0E, 0xEC, 0xCC, 0xDD, 0xDC, 0x99, 0x9F, 0xBB, 0xB9, 0x33, 0x3E
-    };
-
-    for (long i = 0; i < 256; ++i) {
-        video[i] = buffer[i];
+void CPU::setUpTable() {
+    for (auto & i : table) {
+        i = nullptr;
     }
+    table[0x06] = &CPU::LD_nn_n;
+    table[0x0E] = &CPU::LD_nn_n;
+    table[0x16] = &CPU::LD_nn_n;
+    table[0x1E] = &CPU::LD_nn_n;
+    table[0x26] = &CPU::LD_nn_n;
+    table[0x2E] = &CPU::LD_nn_n;
 }
 
 void CPU::loadBootLoader() {
@@ -108,4 +107,79 @@ void CPU::set_F_Register(CPU::F_REGISTER_BITS flag) {
         case CARRY_FLAG:
             F |= 1UL << 4;
     }
+}
+
+void CPU::execute() {
+    opcode = memory[PC];
+    printf("CODE: %X\n", opcode);
+
+    if (table[opcode] == nullptr) {
+        NO_OP();
+    } else {
+        ((*this).*(table[opcode]))();
+    }
+}
+
+// Opcodes
+void CPU::NO_OP() {
+    PC += 1;
+}
+
+void CPU::LD_nn_n() {
+    switch (opcode) {
+        case 0x06:
+            PC += 0x2;
+            B = memory[PC++];
+        case 0x0E:
+            PC += 0x2;
+            C = memory[PC++];
+        case 0x16:
+            PC += 0x2;
+            D = memory[PC++];
+        case 0x1E:
+            PC += 0x2;
+            E = memory[PC++];
+        case 0x26:
+            PC += 0x2;
+            H = memory[PC++];
+        case 0x2E:
+            PC += 0x2;
+            L = memory[PC++];
+    }
+}
+
+void CPU::LD_r1_r2() {
+
+}
+
+void CPU::LD_A_n() {
+
+}
+
+void CPU::LD_n_A() {
+
+}
+
+void CPU::LD_A_addr_C() {
+
+}
+
+void CPU::LD_addr_C_A() {
+
+}
+
+void CPU::LD_A_addr_HLD() {
+
+}
+
+void CPU::LD_A_addr_HL_minus() {
+
+}
+
+void CPU::LDD_A_addr_HL() {
+
+}
+
+void CPU::LD_addr_HLD_A() {
+
 }

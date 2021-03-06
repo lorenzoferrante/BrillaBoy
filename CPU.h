@@ -57,11 +57,15 @@ class CPU {
 public:
     CPU(char* filename);
     void reset();
-    void NintendoLogo();
+    void setUpTable();
     void loadBootLoader();
     void loadROM(char* filename);
     void cycle();
     void set_F_Register(F_REGISTER_BITS flag);
+    void execute();
+
+    // Opcode
+    uint8_t opcode{};
 
     // Memory
     uint8_t bootloader[256]{};
@@ -91,6 +95,22 @@ public:
     uint16_t getDE() const;
     uint16_t getHL() const;
 
+    typedef void (CPU::*CPUFunc)();
+    CPUFunc table[256];
+
+    // Opcodes
+    void NO_OP();
+    void LD_nn_n();
+    void LD_r1_r2();
+    void LD_A_n();
+    void LD_n_A();
+    void LD_A_addr_C();
+    void LD_addr_C_A();
+    void LD_A_addr_HLD();
+    void LD_A_addr_HL_minus();
+    void LDD_A_addr_HL();
+    void LD_addr_HLD_A();
+    // Page 72
 };
 
 
