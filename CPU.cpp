@@ -9,8 +9,8 @@
 
 CPU::CPU(char *filename) {
     reset();
-    NintendoLogo();
-    loadBootLoader();
+    //NintendoLogo();
+    //loadBootLoader();
     loadROM(filename);
 }
 
