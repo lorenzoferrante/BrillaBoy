@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstring>
 
 CPU::CPU(char *filename) {
     reset();
