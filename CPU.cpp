@@ -17,7 +17,7 @@ CPU::CPU(char *filename) {
 
 void CPU::setUpTable() {
     for (auto & i : table) {
-        i = nullptr;
+        i = &CPU::NO_OP;
     }
     table[0x06] = &CPU::LD_nn_n;
     table[0x0E] = &CPU::LD_nn_n;
@@ -113,11 +113,8 @@ void CPU::execute() {
     opcode = memory[PC];
     printf("CODE: %X\n", opcode);
 
-    if (table[opcode] == nullptr) {
-        NO_OP();
-    } else {
-        ((*this).*(table[opcode]))();
-    }
+    // Decode and execute instruction
+    ((*this).*(table[opcode]))();
 }
 
 // Opcodes
