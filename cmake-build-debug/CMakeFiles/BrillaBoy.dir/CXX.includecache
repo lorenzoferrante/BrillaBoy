@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/lorenzoferrante/CLionProjects/BrillaBoy/GUI.cpp
+GUI.h
+/Users/lorenzoferrante/CLionProjects/BrillaBoy/GUI.h
+SDL2/SDL.h
+-
+
+/Users/lorenzoferrante/CLionProjects/BrillaBoy/GUI.h
+cstdint
+-
+
