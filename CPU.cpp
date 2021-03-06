@@ -28,6 +28,7 @@ void CPU::setUpTable() {
 }
 
 void CPU::loadBootLoader() {
+    // Absolute path???
     char* bootloader_path = "/Users/lorenzoferrante/CLionProjects/BrillaBoy/DMG_ROM.bin";
     FILE *fp = fopen(bootloader_path, "rb");
     fread(bootloader, sizeof(uint8_t), 256, fp);
