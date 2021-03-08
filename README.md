@@ -34,7 +34,7 @@ Gameboy emulator written in C++.\
 Brilla is my cat.
 
 ## How to use
-**NOTE**: You'll need SDL2 installed on your machine.\
+**NOTE**: You'll need SDL2 installed on your machine.
 
 If you have CLion, you can import the project and run it.
 
