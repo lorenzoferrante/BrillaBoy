@@ -7,7 +7,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR})
 
-add_executable(BrillaBoy main.cpp CPU.cpp CPU.h GUI.cpp GUI.h)
+add_executable(BrillaBoy main.cpp CPU.cpp Table.cpp Opcodes.cpp CPU.h GUI.cpp GUI.h)
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY})
 target_compile_options(${PROJECT_NAME} PRIVATE "-fobjc-arc")

@@ -15,18 +15,6 @@ CPU::CPU(char *filename) {
     loadROM(filename);
 }
 
-void CPU::setUpTable() {
-    for (auto & i : table) {
-        i = &CPU::NO_OP;
-    }
-    table[0x06] = &CPU::LD_nn_n;
-    table[0x0E] = &CPU::LD_nn_n;
-    table[0x16] = &CPU::LD_nn_n;
-    table[0x1E] = &CPU::LD_nn_n;
-    table[0x26] = &CPU::LD_nn_n;
-    table[0x2E] = &CPU::LD_nn_n;
-}
-
 void CPU::loadBootLoader() {
     // Absolute path???
     char* bootloader_path = "/Users/lorenzoferrante/CLionProjects/BrillaBoy/DMG_ROM.bin";
@@ -40,7 +28,8 @@ void CPU::loadBootLoader() {
 }
 
 void CPU::reset() {
-    memset(video, 0x0, sizeof(video));
+    memset(video, 0x00, sizeof(video));
+    memset(video_buffer, 0x00, sizeof(video_buffer));
     memset(memory, 0, sizeof(memory));
     A = 0x0;
     B = 0x0;
@@ -112,72 +101,20 @@ void CPU::set_F_Register(CPU::F_REGISTER_BITS flag) {
 
 void CPU::execute() {
     opcode = memory[PC];
-    printf("CODE: %X\n", opcode);
+    printf("Code: 0x%X - Addr: 0x%X\n", opcode, PC);
 
-    // Decode and execute instruction
-    ((*this).*(table[opcode]))();
-}
-
-// Opcodes
-void CPU::NO_OP() {
-    PC += 1;
-}
-
-void CPU::LD_nn_n() {
-    switch (opcode) {
-        case 0x06:
+    if (opcode == 0xCB) {
+        PC += 0x1;
+        opcode = memory[PC];
+        // Decode and execute instruction
+        ((*this).*(table_CB[opcode]))();
+        PC += 0x1;
+    } else {
+        // Decode and execute instruction
+        uint16_t oldPC = PC;
+        ((*this).*(table[opcode]))();
+        if (PC == oldPC) {
             PC += 0x2;
-            B = memory[PC++];
-        case 0x0E:
-            PC += 0x2;
-            C = memory[PC++];
-        case 0x16:
-            PC += 0x2;
-            D = memory[PC++];
-        case 0x1E:
-            PC += 0x2;
-            E = memory[PC++];
-        case 0x26:
-            PC += 0x2;
-            H = memory[PC++];
-        case 0x2E:
-            PC += 0x2;
-            L = memory[PC++];
+        }
     }
-}
-
-void CPU::LD_r1_r2() {
-
-}
-
-void CPU::LD_A_n() {
-
-}
-
-void CPU::LD_n_A() {
-
-}
-
-void CPU::LD_A_addr_C() {
-
-}
-
-void CPU::LD_addr_C_A() {
-
-}
-
-void CPU::LD_A_addr_HLD() {
-
-}
-
-void CPU::LD_A_addr_HL_minus() {
-
-}
-
-void CPU::LDD_A_addr_HL() {
-
-}
-
-void CPU::LD_addr_HLD_A() {
-
 }

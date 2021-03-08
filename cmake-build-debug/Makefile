@@ -197,6 +197,60 @@ GUI.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/GUI.cpp.s
 .PHONY : GUI.cpp.s
 
+Opcodes.o: Opcodes.cpp.o
+
+.PHONY : Opcodes.o
+
+# target to build an object file
+Opcodes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o
+.PHONY : Opcodes.cpp.o
+
+Opcodes.i: Opcodes.cpp.i
+
+.PHONY : Opcodes.i
+
+# target to preprocess a source file
+Opcodes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Opcodes.cpp.i
+.PHONY : Opcodes.cpp.i
+
+Opcodes.s: Opcodes.cpp.s
+
+.PHONY : Opcodes.s
+
+# target to generate assembly for a file
+Opcodes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Opcodes.cpp.s
+.PHONY : Opcodes.cpp.s
+
+Table.o: Table.cpp.o
+
+.PHONY : Table.o
+
+# target to build an object file
+Table.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Table.cpp.o
+.PHONY : Table.cpp.o
+
+Table.i: Table.cpp.i
+
+.PHONY : Table.i
+
+# target to preprocess a source file
+Table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Table.cpp.i
+.PHONY : Table.cpp.i
+
+Table.s: Table.cpp.s
+
+.PHONY : Table.s
+
+# target to generate assembly for a file
+Table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Table.cpp.s
+.PHONY : Table.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -239,6 +293,12 @@ help:
 	@echo "... GUI.o"
 	@echo "... GUI.i"
 	@echo "... GUI.s"
+	@echo "... Opcodes.o"
+	@echo "... Opcodes.i"
+	@echo "... Opcodes.s"
+	@echo "... Table.o"
+	@echo "... Table.i"
+	@echo "... Table.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

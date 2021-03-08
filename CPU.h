@@ -69,11 +69,11 @@ public:
 
     // Memory
     uint8_t bootloader[256]{};
-    uint8_t memory[CPU_MEM_SIZE]{};
+    uint16_t memory[CPU_MEM_SIZE]{};
 
     // Video
-    uint32_t video[SCREEN_WIDTH * SCREEN_HEIGHT]{};
-    uint32_t video_buffer[SCREEN_BUFFER * SCREEN_BUFFER]{};
+    uint8_t video[SCREEN_WIDTH * SCREEN_HEIGHT]{};
+    uint8_t video_buffer[SCREEN_BUFFER * SCREEN_BUFFER]{};
 
     // 8-bit Registers
     uint8_t A;
@@ -97,6 +97,7 @@ public:
 
     typedef void (CPU::*CPUFunc)();
     CPUFunc table[256];
+    CPUFunc table_CB[256];
 
     // Opcodes
     void NO_OP();
@@ -106,11 +107,78 @@ public:
     void LD_n_A();
     void LD_A_addr_C();
     void LD_addr_C_A();
-    void LD_A_addr_HLD();
-    void LD_A_addr_HL_minus();
-    void LDD_A_addr_HL();
-    void LD_addr_HLD_A();
-    // Page 72
+    void LD_A_HL_dec();
+    void LD_HL_dec_A();
+    void LD_A_HL_inc();
+    void LD_HL_inc_A();
+    void LDH_addr_n_A();
+    void LDH_A_addr_n();
+    void LD_n_nn();
+    void LD_SP_HL();
+    void LD_HL_SP_inc_n();
+    void LDHL_SP_n();
+    void LD_addr_nn_SP();
+    void PUSH_nn();
+    void POP_nn();
+    void ADD_A_n();
+    void ADC_A_n();
+    void SUB_n();
+    void SBC_A_n();
+    void AND_n();
+    void OR_n();
+    void XOR_n();
+    void CP_n();
+    void INC_n();
+    void DEC_n();
+    void ADD_HL_n();
+    void ADD_SP_n();
+    void INC_nn();
+    void DEC_nn();
+    void SWAP_n();
+    void DAA();
+    void CPL();
+    void CCF();
+    void SCF();
+    void HALT();
+    void STOP();
+    void DI();
+    void EI();
+    void RLCA();
+    void RLA();
+    void RRCA();
+    void RRA();
+
+    // Prefix CB
+    void RLC_n();
+    void RL_n();
+    void RRC_n();
+    void RR_n();
+    void SLA_n();
+    void SRA_n();
+    void SRL_n();
+    void BIT_b_r();
+    void SET_b_r();
+    void RES_b_r();
+
+    // Jumps
+    void JP_nn();
+    void JP_cc_nn();
+    void JP_addr_HL();
+    void JR_n();
+    void JR_cc_n();
+
+    // Calls
+    void CALL_nn();
+    void CALL_cc_nn();
+
+    // Restarts
+    void RST_n();
+
+    // Returns
+    void RET();
+    void RET_cc();
+    void RETI();
+
 };
 
 

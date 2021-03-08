@@ -14,8 +14,8 @@
  *                  'MMM8&&&'      *
  *         |\___/|
  *         )     (             .              '
- *        =\     /=
- *          )===(       *
+ *        =\     /=      *
+ *          )===(
  *         /     \
  *         |     |
  *        /       \
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
         std::exit(EXIT_FAILURE);
     }
 
-    CPU cpu = CPU(argv[0]);
+    CPU cpu = CPU(argv[1]);
 
     GUI gui;
 
@@ -53,14 +53,15 @@ int main(int argc, char** argv) {
     SDL_Event event;
 
     while (is_running) {
-        //gui.update(cpu.video, videoPitch);
+        gui.update(cpu.video, videoPitch);
         cpu.execute();
+
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 is_running = false;
             }
         }
-        SDL_Delay(16);
+        //SDL_Delay(1);
     }
 
     return 0;

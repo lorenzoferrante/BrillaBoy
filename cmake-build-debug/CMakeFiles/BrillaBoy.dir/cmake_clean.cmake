@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "BrillaBoy.pdb"
   "CMakeFiles/BrillaBoy.dir/CPU.cpp.o"
   "CMakeFiles/BrillaBoy.dir/GUI.cpp.o"
+  "CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o"
+  "CMakeFiles/BrillaBoy.dir/Table.cpp.o"
   "CMakeFiles/BrillaBoy.dir/main.cpp.o"
 )
 

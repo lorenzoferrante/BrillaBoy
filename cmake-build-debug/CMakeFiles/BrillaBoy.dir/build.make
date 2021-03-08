@@ -103,9 +103,35 @@ CMakeFiles/BrillaBoy.dir/CPU.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BrillaBoy.dir/CPU.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/lorenzoferrante/CLionProjects/BrillaBoy/CPU.cpp -o CMakeFiles/BrillaBoy.dir/CPU.cpp.s
 
+CMakeFiles/BrillaBoy.dir/Table.cpp.o: CMakeFiles/BrillaBoy.dir/flags.make
+CMakeFiles/BrillaBoy.dir/Table.cpp.o: ../Table.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/lorenzoferrante/CLionProjects/BrillaBoy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BrillaBoy.dir/Table.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BrillaBoy.dir/Table.cpp.o -c /Users/lorenzoferrante/CLionProjects/BrillaBoy/Table.cpp
+
+CMakeFiles/BrillaBoy.dir/Table.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BrillaBoy.dir/Table.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/lorenzoferrante/CLionProjects/BrillaBoy/Table.cpp > CMakeFiles/BrillaBoy.dir/Table.cpp.i
+
+CMakeFiles/BrillaBoy.dir/Table.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BrillaBoy.dir/Table.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/lorenzoferrante/CLionProjects/BrillaBoy/Table.cpp -o CMakeFiles/BrillaBoy.dir/Table.cpp.s
+
+CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o: CMakeFiles/BrillaBoy.dir/flags.make
+CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o: ../Opcodes.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/lorenzoferrante/CLionProjects/BrillaBoy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o -c /Users/lorenzoferrante/CLionProjects/BrillaBoy/Opcodes.cpp
+
+CMakeFiles/BrillaBoy.dir/Opcodes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BrillaBoy.dir/Opcodes.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/lorenzoferrante/CLionProjects/BrillaBoy/Opcodes.cpp > CMakeFiles/BrillaBoy.dir/Opcodes.cpp.i
+
+CMakeFiles/BrillaBoy.dir/Opcodes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BrillaBoy.dir/Opcodes.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/lorenzoferrante/CLionProjects/BrillaBoy/Opcodes.cpp -o CMakeFiles/BrillaBoy.dir/Opcodes.cpp.s
+
 CMakeFiles/BrillaBoy.dir/GUI.cpp.o: CMakeFiles/BrillaBoy.dir/flags.make
 CMakeFiles/BrillaBoy.dir/GUI.cpp.o: ../GUI.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/lorenzoferrante/CLionProjects/BrillaBoy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BrillaBoy.dir/GUI.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/lorenzoferrante/CLionProjects/BrillaBoy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BrillaBoy.dir/GUI.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BrillaBoy.dir/GUI.cpp.o -c /Users/lorenzoferrante/CLionProjects/BrillaBoy/GUI.cpp
 
 CMakeFiles/BrillaBoy.dir/GUI.cpp.i: cmake_force
@@ -120,6 +146,8 @@ CMakeFiles/BrillaBoy.dir/GUI.cpp.s: cmake_force
 BrillaBoy_OBJECTS = \
 "CMakeFiles/BrillaBoy.dir/main.cpp.o" \
 "CMakeFiles/BrillaBoy.dir/CPU.cpp.o" \
+"CMakeFiles/BrillaBoy.dir/Table.cpp.o" \
+"CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o" \
 "CMakeFiles/BrillaBoy.dir/GUI.cpp.o"
 
 # External object files for target BrillaBoy
@@ -127,10 +155,12 @@ BrillaBoy_EXTERNAL_OBJECTS =
 
 BrillaBoy: CMakeFiles/BrillaBoy.dir/main.cpp.o
 BrillaBoy: CMakeFiles/BrillaBoy.dir/CPU.cpp.o
+BrillaBoy: CMakeFiles/BrillaBoy.dir/Table.cpp.o
+BrillaBoy: CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o
 BrillaBoy: CMakeFiles/BrillaBoy.dir/GUI.cpp.o
 BrillaBoy: CMakeFiles/BrillaBoy.dir/build.make
 BrillaBoy: CMakeFiles/BrillaBoy.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/lorenzoferrante/CLionProjects/BrillaBoy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable BrillaBoy"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/lorenzoferrante/CLionProjects/BrillaBoy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable BrillaBoy"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/BrillaBoy.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

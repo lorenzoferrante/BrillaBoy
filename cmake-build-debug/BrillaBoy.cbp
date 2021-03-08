@@ -94,6 +94,12 @@
 		<Unit filename="/Users/lorenzoferrante/CLionProjects/BrillaBoy/GUI.h">
 			<Option target="BrillaBoy"/>
 		</Unit>
+		<Unit filename="/Users/lorenzoferrante/CLionProjects/BrillaBoy/Opcodes.cpp">
+			<Option target="BrillaBoy"/>
+		</Unit>
+		<Unit filename="/Users/lorenzoferrante/CLionProjects/BrillaBoy/Table.cpp">
+			<Option target="BrillaBoy"/>
+		</Unit>
 		<Unit filename="/Users/lorenzoferrante/CLionProjects/BrillaBoy/main.cpp">
 			<Option target="BrillaBoy"/>
 		</Unit>
