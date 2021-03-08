@@ -314,7 +314,11 @@ void CPU::LD_SP_HL() {
 }
 
 void CPU::LD_HL_SP_inc_n() {
-
+    PC += 0x2;
+    uint16_t nn = SP + memory[PC];
+    H = nn >> 8;
+    L = ((nn << 8) >> 8);
+    PC += 0x1;
 }
 
 void CPU::LDHL_SP_n() {
@@ -322,11 +326,20 @@ void CPU::LDHL_SP_n() {
 }
 
 void CPU::LD_addr_nn_SP() {
-
+    PC += 0x2;
+    memory[PC] = SP;
+    PC += 0x1;
 }
 
 void CPU::PUSH_nn() {
-
+    switch (opcode) {
+        case 0xF5:
+        case 0xC5:
+        case 0xD5:
+        case 0xE5:
+            ;
+    }
+    SP -= 0x02;
 }
 
 void CPU::POP_nn() {
