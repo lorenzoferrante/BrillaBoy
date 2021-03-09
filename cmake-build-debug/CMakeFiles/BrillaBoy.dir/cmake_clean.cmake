@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/BrillaBoy.dir/GUI.cpp.o"
   "CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o"
   "CMakeFiles/BrillaBoy.dir/Table.cpp.o"
+  "CMakeFiles/BrillaBoy.dir/Utils.cpp.o"
   "CMakeFiles/BrillaBoy.dir/main.cpp.o"
 )
 

@@ -88,14 +88,22 @@ uint16_t CPU::getHL() const {
 
 void CPU::set_F_Register(CPU::F_REGISTER_BITS flag) {
     switch (flag) {
-        case ZERO_FLAG:
+        case ZERO_FLAG_SET:
             F |= 1UL << 7;
-        case SUBTRACT_FLAG:
+        case ZERO_FLAG_RESET:
+            F &= 0UL << 7;
+        case SUBTRACT_FLAG_SET:
             F |= 1UL << 6;
-        case HALF_CARRY_FLAG:
+        case SUBTRACT_FLAG_RESET:
+            F &= 0UL << 6;
+        case HALF_CARRY_FLAG_SET:
             F |= 1UL << 5;
-        case CARRY_FLAG:
+        case HALF_CARRY_FLAG_RESET:
+            F &= 0UL << 5;
+        case CARRY_FLAG_SET:
             F |= 1UL << 4;
+        case CARRY_FLAG_RESET:
+            F &= 0UL << 4;
     }
 }
 

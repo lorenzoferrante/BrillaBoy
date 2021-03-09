@@ -1,39 +1,7 @@
 //
 // Created by Lorenzo Ferrante on 08/03/21.
 //
-
 #include "CPU.h"
-
-// Utils functions
-void load_r2_into_r1(CPU* cpu, uint8_t* r1, const uint8_t r2) {
-    cpu->PC += 0x3;
-    *r1 = r2;
-}
-
-void load_mem_into_r1(CPU* cpu, uint8_t* r1) {
-    cpu->PC += 0x3;
-    *r1 = cpu->memory[cpu->getHL()];
-}
-
-void load_r1_into_mem(CPU* cpu, const uint8_t r1) {
-    cpu->PC += 0x3;
-    cpu->memory[cpu->getHL()] = r1;
-}
-
-void load_nn_into_16reg(CPU* cpu, uint8_t* r1, uint8_t* r2) {
-    cpu->PC += 0x2;
-    uint16_t nn = cpu->memory[cpu->PC];
-    *r1 = nn >> 8;
-    *r2 = ((nn << 8) >> 8);
-    cpu->PC += 0x1;
-}
-
-uint16_t swap_bytes(const uint8_t byte) {
-    uint8_t hibyte = (byte & 0xFF00) >> 8;
-    uint8_t lobyte = (byte & 0xFF);
-    return ((lobyte << 8) | hibyte);
-}
-
 
 // Opcodes
 void CPU::NO_OP() {
@@ -43,22 +11,22 @@ void CPU::NO_OP() {
 void CPU::LD_nn_n() {
     switch (opcode) {
         case 0x06:
-            PC += 0x2;
+            PC += 0x1;
             B = memory[PC++];
         case 0x0E:
-            PC += 0x2;
+            PC += 0x1;
             C = memory[PC++];
         case 0x16:
-            PC += 0x2;
+            PC += 0x1;
             D = memory[PC++];
         case 0x1E:
-            PC += 0x2;
+            PC += 0x1;
             E = memory[PC++];
         case 0x26:
-            PC += 0x2;
+            PC += 0x1;
             H = memory[PC++];
         case 0x2E:
-            PC += 0x2;
+            PC += 0x1;
             L = memory[PC++];
     }
 }
@@ -164,7 +132,7 @@ void CPU::LD_r1_r2() {
         case 0x6D:
             load_r2_into_r1(this, &L, L);
         case 0x6E:
-            load_mem_into_r1(this, &L);
+            load_r2_into_r1(this, &L, memory[getHL()]);
         case 0x70:
             load_r1_into_mem(this, B);
         case 0x71:
@@ -178,7 +146,7 @@ void CPU::LD_r1_r2() {
         case 0x75:
             load_r1_into_mem(this, L);
         case 0x36:
-            PC += 0x2;
+            PC += 0x1;
             memory[getHL()] = memory[PC];
             PC += 0x1;
     }
@@ -207,7 +175,7 @@ void CPU::LD_A_n() {
         case 0x7E:
             load_r2_into_r1(this, &A, memory[getHL()]);
         case 0xFA:
-            PC += 0x2;
+            PC += 0x1;
             A = swap_bytes(memory[PC]);
             PC += 0x1;
         case 0x35:
@@ -232,63 +200,63 @@ void CPU::LD_n_A() {
         case 0x6F:
             load_r2_into_r1(this, &L, A);
         case 0x02:
-            PC += 0x3;
+            PC += 0x1;
             memory[getBC()] = A;
         case 0x12:
-            PC += 0x3;
+            PC += 0x1;
             memory[getDE()] = A;
         case 0x77:
-            PC += 0x3;
+            PC += 0x1;
             memory[getHL()] = A;
         case 0xEA:
-            PC += 0x2;
+            PC += 0x1;
             memory[swap_bytes(memory[PC])] = A;
             PC += 0x1;
     }
 }
 
 void CPU::LD_A_addr_C() {
-    PC += 0x3;
+    PC += 0x1;
     A = 0xFF00 + C;
 }
 
 void CPU::LD_addr_C_A() {
-    PC += 0x3;
+    PC += 0x1;
     memory[0xFF00 + C] = A;
 }
 
 void CPU::LD_A_HL_dec() {
-    PC += 0x3;
+    PC += 0x1;
     A = memory[getHL()];
     L -= 0x1;
 }
 
 void CPU::LD_HL_dec_A() {
-    PC += 0x3;
+    PC += 0x1;
     memory[getHL()] = A;
     L -= 0x1;
 }
 
 void CPU::LD_A_HL_inc() {
-    PC += 0x3;
+    PC += 0x1;
     A = memory[getHL()];
     L += 0x1;
 }
 
 void CPU::LD_HL_inc_A() {
-    PC += 0x3;
+    PC += 0x1;
     memory[getHL()]  = A;
     L += 0x1;
 }
 
 void CPU::LDH_addr_n_A() {
-    PC += 0x2;
+    PC += 0x1;
     memory[0xFF00 + memory[PC]] = A;
     PC += 0x1;
 }
 
 void CPU::LDH_A_addr_n() {
-    PC += 0x2;
+    PC += 0x1;
     A = memory[0xFF00 + memory[PC]];
     PC += 0x1;
 }
@@ -302,19 +270,19 @@ void CPU::LD_n_nn() {
         case 0x21:
             load_nn_into_16reg(this, &H, &L);
         case 0x31:
-            PC += 0x2;
+            PC += 0x1;
             SP = memory[PC];
             PC += 0x1;
     }
 }
 
 void CPU::LD_SP_HL() {
-    PC += 0x3;
+    PC += 0x1;
     SP = getHL();
 }
 
 void CPU::LD_HL_SP_inc_n() {
-    PC += 0x2;
+    PC += 0x1;
     uint16_t nn = SP + memory[PC];
     H = nn >> 8;
     L = ((nn << 8) >> 8);
@@ -326,88 +294,360 @@ void CPU::LDHL_SP_n() {
 }
 
 void CPU::LD_addr_nn_SP() {
-    PC += 0x2;
+    PC += 0x1;
     memory[PC] = SP;
     PC += 0x1;
 }
 
 void CPU::PUSH_nn() {
+    PC += 0x1;
     switch (opcode) {
         case 0xF5:
+            push_nn_onto_sp(this, &A, &F);
         case 0xC5:
+            push_nn_onto_sp(this, &B, &C);
         case 0xD5:
+            push_nn_onto_sp(this, &D, &E);
         case 0xE5:
-            ;
+            push_nn_onto_sp(this, &H, &L);
     }
-    SP -= 0x02;
 }
 
 void CPU::POP_nn() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0xF1:
+            pop_from_sp_to_reg(this, &A, &F);
+        case 0xC1:
+            pop_from_sp_to_reg(this, &B, &C);
+        case 0xD1:
+            pop_from_sp_to_reg(this, &D, &E);
+        case 0xE1:
+            pop_from_sp_to_reg(this, &H, &L);
+    }
 }
 
 void CPU::ADD_A_n() {
-
+    PC += 01;
+    switch (opcode) {
+        case 0x87:
+            add_reg_to_A(this, &A);
+        case 0x80:
+            add_reg_to_A(this, &B);
+        case 0x81:
+            add_reg_to_A(this, &C);
+        case 0x82:
+            add_reg_to_A(this, &D);
+        case 0x83:
+            add_reg_to_A(this, &E);
+        case 0x84:
+            add_reg_to_A(this, &H);
+        case 0x85:
+            add_reg_to_A(this, &L);
+        case 0x86:
+            add_reg_to_A(this, reinterpret_cast<const uint8_t *>(&memory[getHL()]));
+        case 0xC6:
+            NO_OP();
+    }
 }
 
 void CPU::ADC_A_n() {
-
+    PC += 01;
+    switch (opcode) {
+        case 0x8F:
+            add_carry_to_a(this, &A);
+        case 0x88:
+            add_carry_to_a(this, &B);
+        case 0x89:
+            add_carry_to_a(this, &C);
+        case 0x8A:
+            add_carry_to_a(this, &D);
+        case 0x8B:
+            add_carry_to_a(this, &E);
+        case 0x8C:
+            add_carry_to_a(this, &H);
+        case 0x8D:
+            add_carry_to_a(this, &L);
+        case 0x8E:
+            add_carry_to_a(this, reinterpret_cast<const uint8_t *>(&memory[getHL()]));
+        case 0xCE:
+            NO_OP();
+    }
 }
 
 void CPU::SUB_n() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0x97:
+            sub_reg_to_A(this, &A);
+        case 0x90:
+            sub_reg_to_A(this, &B);
+        case 0x91:
+            sub_reg_to_A(this, &C);
+        case 0x92:
+            sub_reg_to_A(this, &D);
+        case 0x93:
+            sub_reg_to_A(this, &E);
+        case 0x94:
+            sub_reg_to_A(this, &H);
+        case 0x95:
+            sub_reg_to_A(this, &L);
+        case 0x96:
+            sub_reg_to_A(this, reinterpret_cast<const uint8_t *>(&memory[getHL()]));
+        case 0xD6:
+            NO_OP();
+    }
 }
 
 void CPU::SBC_A_n() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0x9F:
+            sub_carry_to_A(this, &A);
+        case 0x98:
+            sub_carry_to_A(this, &B);
+        case 0x99:
+            sub_carry_to_A(this, &C);
+        case 0x9A:
+            sub_carry_to_A(this, &D);
+        case 0x9B:
+            sub_carry_to_A(this, &E);
+        case 0x9C:
+            sub_carry_to_A(this, &H);
+        case 0x9D:
+            sub_carry_to_A(this, &L);
+        case 0x9E:
+            sub_carry_to_A(this, reinterpret_cast<const uint8_t *>(&memory[getHL()]));
+    }
 }
 
 void CPU::AND_n() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0xA7:
+            and_A(this, &A);
+        case 0xA0:
+            and_A(this, &B);
+        case 0xA1:
+            and_A(this, &C);
+        case 0xA2:
+            and_A(this, &D);
+        case 0xA3:
+            and_A(this, &E);
+        case 0xA4:
+            and_A(this, &H);
+        case 0xA5:
+            and_A(this, &L);
+        case 0xA6:
+            and_A(this, reinterpret_cast<const uint8_t *>(&memory[getHL()]));
+        case 0xE6:
+            NO_OP();
+    }
 }
 
 void CPU::OR_n() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0xB7:
+            or_A(this, &A);
+        case 0xB0:
+            or_A(this, &B);
+        case 0xB1:
+            or_A(this, &C);
+        case 0xB2:
+            or_A(this, &D);
+        case 0xB3:
+            or_A(this, &E);
+        case 0xB4:
+            or_A(this, &H);
+        case 0xB5:
+            or_A(this, &L);
+        case 0xB6:
+            or_A(this, reinterpret_cast<const uint8_t *>(&memory[getHL()]));
+        case 0xF6:
+            NO_OP();
+    }
 }
 
 void CPU::XOR_n() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0xAF:
+            xor_A(this, &A);
+        case 0xA8:
+            xor_A(this, &B);
+        case 0xA9:
+            xor_A(this, &C);
+        case 0xAA:
+            xor_A(this, &D);
+        case 0xAB:
+            xor_A(this, &E);
+        case 0xAC:
+            xor_A(this, &H);
+        case 0xAD:
+            xor_A(this, &L);
+        case 0xAE:
+            xor_A(this, reinterpret_cast<const uint8_t *>(&memory[getHL()]));
+        case 0xEE:
+            NO_OP();
+    }
 }
 
 void CPU::CP_n() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0xBF:
+            cp_A_n(this, &A);
+        case 0xB8:
+            cp_A_n(this, &B);
+        case 0xB9:
+            cp_A_n(this, &C);
+        case 0xBA:
+            cp_A_n(this, &D);
+        case 0xBB:
+            cp_A_n(this, &E);
+        case 0xBC:
+            cp_A_n(this, &H);
+        case 0xBD:
+            cp_A_n(this, &L);
+        case 0xBE:
+            cp_A_n(this, reinterpret_cast<const uint8_t *>(&memory[getHL()]));
+        case 0xFE:
+            NO_OP();
+    }
 }
 
 void CPU::INC_n() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0x3C:
+            inc_reg(this, &A);
+        case 0x04:
+            inc_reg(this, &B);
+        case 0x0C:
+            inc_reg(this, &C);
+        case 0x14:
+            inc_reg(this, &D);
+        case 0x1C:
+            inc_reg(this, &E);
+        case 0x24:
+            inc_reg(this, &H);
+        case 0x2C:
+            inc_reg(this, &L);
+        case 0x34:
+            memory[getHL()] += 0x1;
+            if (memory[getHL()] == 0) set_F_Register(CPU::ZERO_FLAG_SET);
+            set_F_Register(CPU::SUBTRACT_FLAG_RESET);
+            // Set if carry from bit 3
+            if ((memory[getHL()] & 0x0F) == 0x00) set_F_Register(CPU::HALF_CARRY_FLAG_SET);
+    }
 }
 
 void CPU::DEC_n() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0x3D:
+            dec_reg(this, &A);
+        case 0x05:
+            dec_reg(this, &B);
+        case 0x0D:
+            dec_reg(this, &C);
+        case 0x15:
+            dec_reg(this, &D);
+        case 0x1D:
+            dec_reg(this, &E);
+        case 0x25:
+            dec_reg(this, &H);
+        case 0x2D:
+            dec_reg(this, &L);
+        case 0x35:
+            memory[getHL()] -= 0x1;
+            if (memory[getHL()] == 0) set_F_Register(CPU::ZERO_FLAG_SET);
+            set_F_Register(CPU::SUBTRACT_FLAG_SET);
+            // Set if carry from bit 3
+            if ((memory[getHL()] & 0x0F) == 0x0F) set_F_Register(CPU::HALF_CARRY_FLAG_SET);
+    }
 }
 
 void CPU::ADD_HL_n() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0x09:
+            add_r2_to_r1_16(this, B, C);
+        case 0x19:
+            add_r2_to_r1_16(this, D, E);
+        case 0x29:
+            add_r2_to_r1_16(this, H, L);
+        case 0x39:
+            add_sp_to_hl(this);
+    }
 }
 
 void CPU::ADD_SP_n() {
-
+    add_n_to_SP(this);
 }
 
 void CPU::INC_nn() {
+    PC += 0x1;
+    switch (opcode) {
+        case 0x03:
+            inc_reg_16(this, &B, &C, getBC());
+        case 0x13:
+            inc_reg_16(this, &D, &E, getDE());
+        case 0x23:
+            inc_reg_16(this, &H, &L, getHL());
+        case 0x33:
+            SP += 0x1;
+    }
 
 }
 
 void CPU::DEC_nn() {
-
+    PC += 0x1;
+    switch (opcode) {
+        case 0x0B:
+            dec_reg_16(this, &B, &C, getBC());
+        case 0x1B:
+            dec_reg_16(this, &D, &E, getDE());
+        case 0x2B:
+            dec_reg_16(this, &H, &L, getHL());
+        case 0x3B:
+            SP -= 0x1;
+    }
 }
 
 void CPU::SWAP_n() {
+    PC += 0x1;
+    switch (opcode) {
+        case 0x37:
+            swap_reg_n(this, &A);
+        case 0x30:
+            swap_reg_n(this, &B);
+        case 0x31:
+            swap_reg_n(this, &C);
+        case 0x32:
+            swap_reg_n(this, &D);
+        case 0x33:
+            swap_reg_n(this, &E);
+        case 0x34:
+            swap_reg_n(this, &H);
+        case 0x35:
+            swap_reg_n(this, &L);
+        case 0x36:
+            uint8_t val = memory[getHL()];
+            uint8_t lobits = (val & 0x0F);
+            uint8_t hibits = (val & 0xF0);
+            memory[getHL()] = (lobits << 4) | hibits;
 
+            if (memory[getHL()] == 0x0) set_F_Register(CPU::ZERO_FLAG_SET);
+            set_F_Register(CPU::SUBTRACT_FLAG_RESET);
+            set_F_Register(CPU::HALF_CARRY_FLAG_RESET);
+            set_F_Register(CPU::CARRY_FLAG_RESET);
+    }
 }
 
 void CPU::DAA() {
-
+    // Page 95
 }
 
 void CPU::CPL() {

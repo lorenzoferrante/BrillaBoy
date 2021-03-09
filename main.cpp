@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
                 is_running = false;
             }
         }
-        //SDL_Delay(1);
+        SDL_Delay(100);
     }
 
     return 0;

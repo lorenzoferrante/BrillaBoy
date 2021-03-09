@@ -251,6 +251,33 @@ Table.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Table.cpp.s
 .PHONY : Table.cpp.s
 
+Utils.o: Utils.cpp.o
+
+.PHONY : Utils.o
+
+# target to build an object file
+Utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Utils.cpp.o
+.PHONY : Utils.cpp.o
+
+Utils.i: Utils.cpp.i
+
+.PHONY : Utils.i
+
+# target to preprocess a source file
+Utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Utils.cpp.i
+.PHONY : Utils.cpp.i
+
+Utils.s: Utils.cpp.s
+
+.PHONY : Utils.s
+
+# target to generate assembly for a file
+Utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrillaBoy.dir/build.make CMakeFiles/BrillaBoy.dir/Utils.cpp.s
+.PHONY : Utils.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -299,6 +326,9 @@ help:
 	@echo "... Table.o"
 	@echo "... Table.i"
 	@echo "... Table.s"
+	@echo "... Utils.o"
+	@echo "... Utils.i"
+	@echo "... Utils.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

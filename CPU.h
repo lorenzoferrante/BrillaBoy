@@ -8,22 +8,6 @@
 #include <cstdint>
 
 class CPU {
-
-    /*
-     *  F Register Bits:
-     *  |- - - - - - - - - - - - - - - -|
-     *  | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
-     *  | - | - | - | - | - | - | - | - |
-     *  | Z | N | H | C | 0 | 0 | 0 | 0 |
-     *  |- - - - - - - - - - - - - - - -|
-     */
-    enum F_REGISTER_BITS: int {
-        ZERO_FLAG,
-        SUBTRACT_FLAG,
-        HALF_CARRY_FLAG,
-        CARRY_FLAG
-    };
-
     static const int CPU_MEM_SIZE       =   65535;
     static const int RAM_START_ADDRESS  =   0x100;
     static const int SP_START_ADDRESS   =   0xFFFE;
@@ -55,6 +39,25 @@ class CPU {
     static const unsigned int IE =   0xFFFF;     // Interrupt Enable (R/W)
 
 public:
+    /*
+     *  F Register Bits:
+     *  |- - - - - - - - - - - - - - - -|
+     *  | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+     *  | - | - | - | - | - | - | - | - |
+     *  | Z | N | H | C | 0 | 0 | 0 | 0 |
+     *  |- - - - - - - - - - - - - - - -|
+     */
+    enum F_REGISTER_BITS: int {
+        ZERO_FLAG_SET,
+        ZERO_FLAG_RESET,
+        SUBTRACT_FLAG_SET,
+        SUBTRACT_FLAG_RESET,
+        HALF_CARRY_FLAG_SET,
+        HALF_CARRY_FLAG_RESET,
+        CARRY_FLAG_SET,
+        CARRY_FLAG_RESET
+    };
+
     CPU(char* filename);
     void reset();
     void setUpTable();
@@ -181,5 +184,29 @@ public:
 
 };
 
+extern void load_r2_into_r1(CPU* cpu, uint8_t* r1, const uint8_t r2);
+extern void load_r2_into_r1(CPU* cpu, uint8_t* r1, const uint8_t r2);
+extern void load_mem_into_r1(CPU* cpu, uint8_t* r1);
+extern void load_r1_into_mem(CPU* cpu, const uint8_t r1);
+extern void load_nn_into_16reg(CPU* cpu, uint8_t* r1, uint8_t* r2);
+extern void push_nn_onto_sp(CPU* cpu, const uint8_t* r1, const uint8_t* r2);
+extern void pop_from_sp_to_reg(CPU* cpu, uint8_t* r1, uint8_t* r2);
+extern uint16_t swap_bytes(const uint8_t byte);
+extern void add_reg_to_A(CPU *cpu, const uint8_t* r);
+extern void add_carry_to_a(CPU* cpu, const uint8_t* r);
+extern void sub_reg_to_A(CPU* cpu, const uint8_t* r);
+extern void sub_carry_to_A(CPU* cpu, const uint8_t* r);
+extern void and_A(CPU* cpu, const uint8_t* r);
+extern void or_A(CPU* cpu, const uint8_t* r);
+extern void xor_A(CPU* cpu, const uint8_t* r);
+extern void cp_A_n(CPU* cpu, const uint8_t* r);
+extern void inc_reg(CPU* cpu, uint8_t* r);
+extern void dec_reg(CPU* cpu, uint8_t* r);
+extern void add_r2_to_r1_16(CPU* cpu, uint8_t r1, uint8_t r2);
+extern void add_sp_to_hl(CPU* cpu);
+extern void add_n_to_SP(CPU *cpu);
+extern void inc_reg_16(CPU* cpu, uint8_t* r1, uint8_t* r2, uint16_t r16);
+extern void dec_reg_16(CPU* cpu, uint8_t* r1, uint8_t* r2, uint16_t r16);
+extern void swap_reg_n(CPU* cpu, uint8_t* r);
 
 #endif //BRILLABOY_CPU_H
