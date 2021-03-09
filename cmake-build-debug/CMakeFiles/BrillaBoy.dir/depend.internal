@@ -7,6 +7,15 @@ CMakeFiles/BrillaBoy.dir/CPU.cpp.o
 CMakeFiles/BrillaBoy.dir/GUI.cpp.o
  /Users/lorenzoferrante/CLionProjects/BrillaBoy/GUI.cpp
  /Users/lorenzoferrante/CLionProjects/BrillaBoy/GUI.h
+CMakeFiles/BrillaBoy.dir/Opcodes.cpp.o
+ /Users/lorenzoferrante/CLionProjects/BrillaBoy/CPU.h
+ /Users/lorenzoferrante/CLionProjects/BrillaBoy/Opcodes.cpp
+CMakeFiles/BrillaBoy.dir/Table.cpp.o
+ /Users/lorenzoferrante/CLionProjects/BrillaBoy/CPU.h
+ /Users/lorenzoferrante/CLionProjects/BrillaBoy/Table.cpp
+CMakeFiles/BrillaBoy.dir/Utils.cpp.o
+ /Users/lorenzoferrante/CLionProjects/BrillaBoy/CPU.h
+ /Users/lorenzoferrante/CLionProjects/BrillaBoy/Utils.cpp
 CMakeFiles/BrillaBoy.dir/main.cpp.o
  /Users/lorenzoferrante/CLionProjects/BrillaBoy/CPU.h
  /Users/lorenzoferrante/CLionProjects/BrillaBoy/GUI.h
