@@ -651,35 +651,65 @@ void CPU::DAA() {
 }
 
 void CPU::CPL() {
+    PC += 0x1;
+    uint8_t reg = A;
+    uint8_t res = ~reg;
+    A = res;
 
+    set_F_Register(SUBTRACT_FLAG_SET);
+    set_F_Register(HALF_CARRY_FLAG_SET);
 }
 
 void CPU::CCF() {
+    PC += 0x1;
 
+    set_F_Register(SUBTRACT_FLAG_RESET);
+    set_F_Register(HALF_CARRY_FLAG_RESET);
+
+    int C_FLAG = (F << 3) >> 7;
+    if (C_FLAG == 0) set_F_Register(CARRY_FLAG_SET);
+    else set_F_Register(CARRY_FLAG_RESET);
 }
 
 void CPU::SCF() {
+    PC += 0x1;
 
+    set_F_Register(SUBTRACT_FLAG_RESET);
+    set_F_Register(HALF_CARRY_FLAG_RESET);
+    set_F_Register(CARRY_FLAG_SET);
 }
 
 void CPU::HALT() {
-
+    PC += 0x1;
+    halted = true;
 }
 
 void CPU::STOP() {
-
+    NO_OP();
 }
 
 void CPU::DI() {
-
+    PC += 0x1;
+    interrupts_enabled = false;
 }
 
 void CPU::EI() {
-
+    PC += 0x1;
+    interrupts_enabled = true;
 }
 
 void CPU::RLCA() {
+    PC += 0x1;
 
+    bool last_bit_A = A >> 7;
+    uint8_t res = (A << 1) | (A >> 7);
+    A = res;
+
+    if (res == 0x0) set_F_Register(ZERO_FLAG_SET);
+    set_F_Register(SUBTRACT_FLAG_SET);
+    set_F_Register(HALF_CARRY_FLAG_SET);
+    if (last_bit_A) set_F_Register(CARRY_FLAG_SET);
+    else set_F_Register(CARRY_FLAG_RESET);
 }
 
 void CPU::RLA() {

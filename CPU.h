@@ -67,6 +67,9 @@ public:
     void set_F_Register(F_REGISTER_BITS flag);
     void execute();
 
+    bool interrupts_enabled = false;
+    bool halted = false;
+
     // Opcode
     uint8_t opcode{};
 
